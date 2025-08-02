@@ -1,0 +1,35 @@
+name: Build wctool
+
+on:
+  push:
+    branches:
+      - test
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 24
+        uses: actions/setup-java@v3
+        with:
+          java-version: "24"
+          distribution: "temurin"
+          cache: maven
+
+      - name: Build with Maven
+        working-directory: wctool
+        run: mvn -B package --file pom.xml -DskipTests
+
+      - name: Upload jar
+        run: |
+          mkdir staging
+          cp myapp/target/*.jar staging
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wc
+          path: staging
