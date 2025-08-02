@@ -3,7 +3,7 @@ name: Build wctool
 on:
   push:
     branches:
-      - test
+      - tests
   workflow_dispatch:
 
 jobs:
