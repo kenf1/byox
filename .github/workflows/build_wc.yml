@@ -27,7 +27,7 @@ jobs:
       - name: Upload jar
         run: |
           mkdir staging
-          cp myapp/target/*.jar staging
+          cp wctool/target/*.jar staging
 
       - uses: actions/upload-artifact@v4
         with:
